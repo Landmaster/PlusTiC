@@ -1,0 +1,67 @@
+item.katana.name=Katana
+item.katana.desc=Das Katana ist eine spezielle Waffe die es ermögicht, Kombos auf dein Ziel zu entfesseln.\nErgänzt die Shuriken
+
+fluid.plustic.coal.name=Geschmolzene Kohle
+fluid.plustic.osmium.name=Geschmolzenes Osmium
+fluid.plustic.refinedobsidian.name=Geschmolzenes veredeltes Obsidian
+fluid.plustic.terrasteel.name=Geschmolzener Terrastahl
+fluid.plustic.elementium.name=Geschmolzenes Elementium
+fluid.plustic.manasteel.name=Geschmolzener Manastahl
+fluid.plustic.iridium.name=Geschmolzenes Iridium
+fluid.plustic.osmiridium.name=Geschmolzenes Osmiridium
+fluid.plustic.titanium.name=Geschmolzenes Titan
+fluid.plustic.alumite.name=Geschmolzenes Alumite
+fluid.plustic.signalum.name=Geschmolzenes Signalum
+fluid.plustic.platinum.name=Geschmolzenes Platin
+fluid.plustic.enderium.name=Geschmolzenes Enderium
+fluid.plustic.nickel.name=Geschmolzenes Nickel
+fluid.plustic.mirion.name=Geschmolzenes Mirion
+fluid.plustic.psimetal.name=Geschmolzenes Psimetall
+fluid.plustic.invar.name=Geschmolzenes Invar
+fluid.plustic.infinity.name=Geschmolzenes Infinity
+fluid.plustic.lumium.name=Geschmolzenes Lumium
+
+item.tindust.name=Zinnpuder
+item.osmiumdust.name=Osmiumpuder
+item.steeldust.name=Stahlpuder
+item.osmiridiumingot.name=Osmiridiumbarren
+item.osmiridiumnugget.name=Osmiridiumklumpen
+item.bronzenugget.name=Bronzeklumpen
+item.bronzeingot.name=Bronzebarren
+item.alumitenugget.name=Alumiteklumpen
+item.alumiteingot.name=Alumitebarren
+item.mirionnugget.name=Mirionklumpen
+item.mirioningot.name=Mirionbarren
+item.invarnugget.name=Invarklumpen
+item.invaringot.name=Invarbarren
+
+tile.osmiridiumblock.name=Osmiridiumblock
+tile.alumiteblock.name=Alumiteblock
+tile.mirionblock.name=Mirionblock
+tile.invarblock.name=Invarblock
+
+msg.plustic.globalmodifier.set=Linked inventory at [x=%d, y=%d, z=%d] and dimension %d
+msg.plustic.portlymodifier.set=Wesen %s gefangen
+msg.plustic.portlymodifier.unset=Wesen %s freigelassen
+msg.plustic.portal.set=Teleportationpunkt lautet [x=%d, y=%d, z=%d] in der Dimension %d
+msg.plustic.nickmodifier.use=Gerade im richtigen Moment!
+msg.plustic.brownmagic.use=Du machst Witze.
+
+tooltip.plustic.globalmodifier.info=Inventar in [x=%d, y=%d, z=%d] und Dimension %d verbunden
+tooltip.plustic.portlymodifier.info=Wesen: %s
+tooltip.plustic.portal.info=Teleportationspunkt: [x=%d, y=%d, z=%d]; Dimension %d
+tooltip.plustic.toggle.info=Klicke zum Umschalten
+tooltip.plustic.toggle.state.true=%s zurzeit §aangeschaltet
+tooltip.plustic.toggle.state.false=%s zurzeit §causgeschaltet
+
+meter.plustic.katana=COMBO LEVEL: %d
+
+key.categories.plustic=PlusTiC
+key.plustic_release_entity.desc=Wesen freilassen
+key.plustic_toggle_gui.desc=Schalte GUI an/aus
+key.plustic_set_portal.desc=Setze Portal
+key.plustic_brown_magic.desc=Aktiviere Braune Magie
+
+entity.plustic.BlindBandit.name=Blinder Bandit
+
+gui.header.toggle=Schalte Modifizierer an/aus
