@@ -28,7 +28,8 @@ import slimeknights.tconstruct.shared.*;
 @Mod.EventBusSubscriber(modid = ModInfo.MODID)
 public class ModuleBase implements IModule {
 	private static CompletableFuture<?> emeraldStage = new CompletableFuture<>();
-
+	private static CompletableFuture<?> glassStage = new CompletableFuture<>();
+	
 	public void init() {
 		if (Config.base) {
 			Material tnt = new Material("tnt", TextFormatting.RED);
@@ -54,6 +55,25 @@ public class ModuleBase implements IModule {
 					new BowMaterialStats(1.1f, 1, 0.9f));
 			PlusTiC.materials.put("emerald", emerald);
 			PlusTiC.materialIntegrationStages.put("emerald", emeraldStage1);
+			
+			// Glass
+			Material glass = new Material("glass_plustic", TextFormatting.WHITE);
+			glass.addTrait(splinters);
+			glass.addTrait(splinters, HEAD);
+			glass.addTrait(jagged, HEAD);
+			glass.addTrait(sharp, HEAD);
+			glass.addItem("blockGlass", 1, Material.VALUE_Ingot);
+			glass.setRepresentativeItem(Blocks.GLASS);
+			glass.setCraftable(false).setCastable(true);
+			PlusTiC.proxy.setRenderInfo(glass, 0xFFFFFF);
+			CompletableFuture<?> glassStage1 = glassStage.thenRun(() -> glass.setFluid(TinkerFluids.glass));
+			TinkerRegistry.addMaterialStats(glass, new HeadMaterialStats(10, 4, 5, STONE),
+					new HandleMaterialStats(0.2F, 6),
+					new ExtraMaterialStats(8),
+					new BowMaterialStats(0.2f, 0.4f, -1f));
+			PlusTiC.materials.put("glass", glass);
+			PlusTiC.materialIntegrationStages.put("glass", glassStage1);
+
 			
 			// alumite is back! (with some changes)
 			Utils.ItemMatGroup alumiteGroup = Utils.registerMatGroup("alumite");
@@ -147,6 +167,7 @@ public class ModuleBase implements IModule {
 	@SubscribeEvent(priority = EventPriority.LOWEST)
 	public static void itemRegEvent(RegistryEvent.Register<Item> event) {
 		emeraldStage.complete(null);
+		glassStage.complete(null);
 	}
 	
 	public void init2() {

@@ -119,6 +119,7 @@ material.certusquartz_plustic.name=Certus Quartz
 material.fluixcrystal_plustic.name=Fluix Crystal
 material.osgloglas.name=Osgloglas
 material.mica.name=Mica
+material.glass_plustic.name=Glass
 
 modifier.bloodymary.name=Bloody Mary
 modifier.bloodymary.desc=§oBrought to you by the legendary Queen of England...§r\nDeals bonus damage depending on the amount of health already lost by the target. Also, a chance to drop a Coagulated Blood for each hit.
