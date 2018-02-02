@@ -17,6 +17,7 @@ public class ModInfo {
 	+ "after:natura;after:psi;after:avaritia;after:landcore;after:landcraft;"
 	+ "after:galacticraftcore;after:galacticraftplanets;after:minefactoryreloaded;"
 	+ "after:botanicaladdons;after:survivalist;after:modernmetals;after:basemetals;"
-	+ "after:projecte;after:gemsplus;after:appliedenergistics2;after:environmentaltech";
+	+ "after:projecte;after:gemsplus;after:appliedenergistics2;after:environmentaltech;"
+	+ "after:industrialforegoing;after:twilightforest;";
 	
 }

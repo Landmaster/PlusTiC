@@ -14,8 +14,7 @@ import landmaster.plustic.traits.*;
 import net.minecraft.item.*;
 import net.minecraft.util.text.*;
 import net.minecraftforge.event.*;
-import net.minecraftforge.fml.common.Loader;
-import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.*;
 import net.minecraftforge.fml.common.eventhandler.*;
 import slimeknights.tconstruct.library.*;
 import slimeknights.tconstruct.library.materials.*;
@@ -82,6 +81,18 @@ public class ModuleNatura implements IModule {
 	                new BowMaterialStats(0.7f, 2.0f, 7));
 			PlusTiC.materials.put("fusewood", fusewood);
 			PlusTiC.materialIntegrationStages.put("fusewood", fusewoodPromise);
+			
+			Material flamestring = new Material("flamestring_plustic", 0xFF3314);
+			flamestring.addTrait(Naphtha.naphtha);
+			CompletableFuture<?> flamestringPromise = itemPromise.thenRun(() -> {
+				flamestring.addItem(NaturaCommons.flameString, 1, Material.VALUE_Ingot);
+				flamestring.setRepresentativeItem(NaturaCommons.flameString);
+			});
+			flamestring.setCraftable(true);
+			PlusTiC.proxy.setRenderInfo(flamestring, 0xFF3314);
+			TinkerRegistry.addMaterialStats(flamestring, new BowStringMaterialStats(1.2f));
+			PlusTiC.materials.put("flamestring", flamestring);
+			PlusTiC.materialIntegrationStages.put("flamestring", flamestringPromise);
 		}
 	}
 	

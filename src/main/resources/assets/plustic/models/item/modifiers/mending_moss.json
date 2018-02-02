@@ -1,0 +1,6 @@
+{
+	"textures": {
+		"katana": "plustic:items/katana/mod_mending_moss",
+		"laser_gun": "plustic:items/laser_gun/mod_mending_moss"
+	}
+}

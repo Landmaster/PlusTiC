@@ -1,5 +1,6 @@
 {
 	"textures": {
-		"katana": "plustic:items/katana/mod_beheading"
+		"katana": "plustic:items/katana/mod_beheading",
+		"laser_gun": "plustic:items/laser_gun/mod_beheading"
 	}
 }

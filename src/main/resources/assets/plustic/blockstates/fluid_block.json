@@ -96,6 +96,12 @@
 		}],
 		"osgloglas": [{
 			"custom": { "fluid": "osgloglas" }
+		}],
+		"fiery_blood": [{
+			"custom": { "fluid": "fiery_blood" }
+		}],
+		"fiery": [{
+			"custom": { "fluid": "fiery" }
 		}]
 	}
 }

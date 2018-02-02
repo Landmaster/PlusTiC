@@ -38,18 +38,30 @@ public class ModuleBotania implements IModule {
 				
 				Material terrasteel = new Material("terrasteel", TextFormatting.GREEN);
 				botaniaMaterials.put("terrasteel", terrasteel);
+				FluidMolten terrasteelFluid = Utils.fluidMetal("terrasteel", 0x00FF00);
+				terrasteelFluid.setTemperature(760);
+				Utils.initFluidMetal(terrasteelFluid);
 				
 				Material elementium = new Material("elementium", TextFormatting.LIGHT_PURPLE);
 				botaniaMaterials.put("elvenElementium", elementium);
+				FluidMolten elementiumFluid = Utils.fluidMetal("elementium", 0xF66AFD);
+				elementiumFluid.setTemperature(800);
+				Utils.initFluidMetal(elementiumFluid);
 				
 				Material manasteel = new Material("manasteel", TextFormatting.BLUE);
 				botaniaMaterials.put("manasteel", manasteel);
+				FluidMolten manasteelFluid = Utils.fluidMetal("manasteel", 0x54E5FF);
+				manasteelFluid.setTemperature(681);
+				Utils.initFluidMetal(manasteelFluid);
 				
 				Material livingwood = new Material("livingwood_plustic", TextFormatting.DARK_GREEN);
 				botaniaMaterials.put("livingwood", livingwood);
 				
 				Material mirion = new Material("mirion", TextFormatting.YELLOW);
 				botaniaMaterials.put("mirion", mirion);
+				FluidMolten mirionFluid = Utils.fluidMetal("mirion", 0xDDFF00);
+				mirionFluid.setTemperature(777);
+				Utils.initFluidMetal(mirionFluid);
 				
 				final CompletableFuture<?> integrationPromise = itemPromise.thenRun(() -> {
 					terrasteel.addTrait(Mana.mana);
@@ -61,9 +73,6 @@ public class ModuleBotania implements IModule {
 					Utils.setDispItem(terrasteel, "ingotTerrasteel");
 					PlusTiC.proxy.setRenderInfo(terrasteel, 0x00FF00);
 					
-					FluidMolten terrasteelFluid = Utils.fluidMetal("terrasteel", 0x00FF00);
-					terrasteelFluid.setTemperature(760);
-					Utils.initFluidMetal(terrasteelFluid);
 					terrasteel.setFluid(terrasteelFluid);
 					
 					TinkerRegistry.addMaterialStats(terrasteel, new HeadMaterialStats(1562, 9, 6.5f, COBALT));
@@ -80,9 +89,6 @@ public class ModuleBotania implements IModule {
 					Utils.setDispItem(elementium, "ingotElvenElementium");
 					PlusTiC.proxy.setRenderInfo(elementium, 0xF66AFD);
 					
-					FluidMolten elementiumFluid = Utils.fluidMetal("elementium", 0xF66AFD);
-					elementiumFluid.setTemperature(800);
-					Utils.initFluidMetal(elementiumFluid);
 					elementium.setFluid(elementiumFluid);
 					
 					TinkerRegistry.addMaterialStats(elementium, new HeadMaterialStats(540, 7.00f, 6.00f, OBSIDIAN),
@@ -96,9 +102,6 @@ public class ModuleBotania implements IModule {
 					Utils.setDispItem(manasteel, "ingotManasteel");
 					PlusTiC.proxy.setRenderInfo(manasteel, 0x54E5FF);
 					
-					FluidMolten manasteelFluid = Utils.fluidMetal("manasteel", 0x54E5FF);
-					manasteelFluid.setTemperature(681);
-					Utils.initFluidMetal(manasteelFluid);
 					manasteel.setFluid(manasteelFluid);
 					
 					TinkerRegistry.addMaterialStats(manasteel, new HeadMaterialStats(540, 7.00f, 6.00f, OBSIDIAN),
@@ -130,9 +133,6 @@ public class ModuleBotania implements IModule {
 					mirion.setRepresentativeItem(mirionGroup.ingot);
 					PlusTiC.proxy.setRenderInfo(mirion, 0xDDFF00);
 					
-					FluidMolten mirionFluid = Utils.fluidMetal("mirion", 0xDDFF00);
-					mirionFluid.setTemperature(777);
-					Utils.initFluidMetal(mirionFluid);
 					mirion.setFluid(mirionFluid);
 					TinkerRegistry.registerAlloy(new FluidStack(mirionFluid, 4 * 18), new FluidStack(terrasteelFluid, 18),
 							new FluidStack(manasteelFluid, 18), new FluidStack(elementiumFluid, 18),

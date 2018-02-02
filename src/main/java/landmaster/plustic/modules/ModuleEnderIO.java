@@ -29,8 +29,8 @@ public class ModuleEnderIO implements IModule {
 			Utils.initFluidMetal(coalFluid);
 			
 			TinkerRegistry.registerMelting("coal", coalFluid, 100);
-			TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.COAL_BLOCK), null, coalFluid, 900);
-			TinkerRegistry.registerTableCasting(new ItemStack(Items.COAL), null, coalFluid, 100);
+			TinkerRegistry.registerBasinCasting(new ItemStack(Blocks.COAL_BLOCK), ItemStack.EMPTY, coalFluid, 900);
+			TinkerRegistry.registerTableCasting(new ItemStack(Items.COAL), ItemStack.EMPTY, coalFluid, 100);
 			
 			Material darkSteel = new Material("darksteel_plustic_enderio", TextFormatting.DARK_GRAY);
 			darkSteel.addTrait(Portly.portly, HEAD);

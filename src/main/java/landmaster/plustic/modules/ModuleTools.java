@@ -95,7 +95,25 @@ public class ModuleTools implements IModule {
 		
 		// for added PlusTiC tools
 		// TODO add more modifier jsons
-		for (IModifier modifier: new IModifier[] { TinkerModifiers.modBeheading, TinkerModifiers.modDiamond, TinkerModifiers.modEmerald }) {
+		for (IModifier modifier: new IModifier[] {
+			TinkerModifiers.modBaneOfArthopods,
+			TinkerModifiers.modBeheading,
+			TinkerModifiers.modDiamond,
+			TinkerModifiers.modEmerald,
+			TinkerModifiers.modGlowing,
+			TinkerModifiers.modHaste,
+			TinkerModifiers.modKnockback,
+			TinkerModifiers.modLuck,
+			TinkerModifiers.modMendingMoss,
+			TinkerModifiers.modNecrotic,
+			TinkerModifiers.modReinforced,
+			TinkerModifiers.modSharpness,
+			TinkerModifiers.modShulking,
+			TinkerModifiers.modSilktouch,
+			TinkerModifiers.modSmite,
+			TinkerModifiers.modSoulbound,
+			TinkerModifiers.modWebbed,
+		}) {
 			PlusTiC.proxy.registerModifierModel(modifier,
 					new ResourceLocation(ModInfo.MODID, "models/item/modifiers/"+modifier.getIdentifier()));
 		}

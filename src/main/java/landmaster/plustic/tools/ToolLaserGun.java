@@ -68,18 +68,18 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 	
 	private static Optional<ItemStack> getActiveLaserGun(EntityLivingBase entity) {
 		return Arrays.stream(EnumHand.values())
-		.map(entity::getHeldItem)
-		.filter(stack -> stack != null
+				.map(entity::getHeldItem)
+				.filter(stack -> stack != null
 				&& stack.getItem() instanceof ToolLaserGun
 				&& TagUtil.getTagSafe(stack).getInteger(ATTACK_DURATION_TAG) > 0)
-		.findFirst();
+				.findFirst();
 	}
 	
 	public static final ResourceLocation LASER_LOC = new ResourceLocation(ModInfo.MODID, "textures/effects/laserbeam.png");
 	
 	public static enum Mode implements IEnumL10n {
 		ATTACK, TOOL;
-
+		
 		@Override
 		public String getUnlocName() {
 			return "mode.laser_gun."+name().toLowerCase(Locale.US);
@@ -122,7 +122,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 	}
 	
 	public static class ProxyClient extends Proxy {
-		private static final Map<EntityPlayer, Vec3d> zapBlockRend = new HashMap<>();
+		private static final Map<EntityPlayer, Vec3d> zapBlockRend = new WeakHashMap<>();
 		
 		public void addToZapBlockRendering(EntityPlayer shooter, Vec3d target) {
 			zapBlockRend.put(shooter, target);
@@ -158,7 +158,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 			getActiveLaserGun(shooter)
 			.ifPresent(stack -> {
 				GlStateManager.depthMask(false);
-	            GlStateManager.enableBlend();
+				GlStateManager.enableBlend();
 				GlStateManager.blendFunc(GL11.GL_ONE, GL11.GL_ONE);
 				
 				GlStateManager.pushMatrix();
@@ -167,18 +167,18 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 				
 				float partialTicks = Minecraft.getMinecraft().getRenderPartialTicks();
 				double doubleX = player.lastTickPosX + (player.posX - player.lastTickPosX) * partialTicks;
-	            double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
-	            double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
-	            
-	            Vec3d vec = new Vec3d(doubleX, doubleY+player.getEyeHeight(), doubleZ);
-	            Vec3d vec0 = shooter.getPositionVector().addVector(0, shooter.getEyeHeight()+0.2, 0);
-	            Vec3d vec1 = vec0;
-	            
-	            switch (IToggleTool.getMode(stack, Mode.class)) {
+				double doubleY = player.lastTickPosY + (player.posY - player.lastTickPosY) * partialTicks;
+				double doubleZ = player.lastTickPosZ + (player.posZ - player.lastTickPosZ) * partialTicks;
+				
+				Vec3d vec = new Vec3d(doubleX, doubleY+player.getEyeHeight(), doubleZ);
+				Vec3d vec0 = shooter.getPositionVector().addVector(0, shooter.getEyeHeight()+0.2, 0);
+				Vec3d vec1 = vec0;
+				
+				switch (IToggleTool.getMode(stack, Mode.class)) {
 				case ATTACK:
 					vec1 = Optional.ofNullable(EntityUtil.raytraceEntityPlayerLook(player, range(stack)))
-	            		.map(rtr -> rtr.hitVec)
-	            		.orElse(vec1);
+					.map(rtr -> rtr.hitVec)
+					.orElse(vec1);
 					break;
 				case TOOL:
 					if (zapBlockRend.containsKey(shooter)) {
@@ -188,20 +188,20 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 					break;
 				default:
 					break;
-	            }
-	            
-	            GlStateManager.translate(-doubleX, -doubleY, -doubleZ);
+				}
+				
+				GlStateManager.translate(-doubleX, -doubleY, -doubleZ);
 				
 				Tessellator tessellator = Tessellator.getInstance();
-	            BufferBuilder buffer = tessellator.getBuffer();
-	            
-	            Minecraft.getMinecraft().renderEngine.bindTexture(LASER_LOC);
-	            
-	            buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
-	            
-	            ClientUtils.drawBeam(vec0, vec1, vec, 0.13f);
-	            
-	            tessellator.draw();
+				BufferBuilder buffer = tessellator.getBuffer();
+				
+				Minecraft.getMinecraft().renderEngine.bindTexture(LASER_LOC);
+				
+				buffer.begin(GL11.GL_QUADS, DefaultVertexFormats.POSITION_TEX_LMAP_COLOR);
+				
+				ClientUtils.drawBeam(vec0, vec1, vec, 0.13f);
+				
+				tessellator.draw();
 				
 				GlStateManager.popMatrix();
 				
@@ -231,7 +231,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 			this.addDefaultSubItems(list, null, null, TinkerMaterials.prismarine, TinkerMaterials.manyullyn);
 		}
 	}
-
+	
 	@Override
 	protected LaserNBT buildTagData(List<Material> materials) {
 		LaserNBT nbt = new LaserNBT();
@@ -241,12 +241,12 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		nbt.batteryCell(materials.get(3).getStatsOrUnknown(BatteryCellMaterialStats.TYPE));
 		return nbt;
 	}
-
+	
 	@Override
 	public float damagePotential() {
 		return 1.0f;
 	}
-
+	
 	@Override
 	public double attackSpeed() {
 		return 3;
@@ -267,23 +267,23 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		
 		TooltipBuilder info = new TooltipBuilder(stack);
 		
-	    info.addDurability(!detailed);
-	    // for energy stored
-	    info.add(String.format(TextFormatting.AQUA+"%s RF / %s RF", this.getEnergyStored(stack), this.getMaxEnergyStored(stack)));
-	    
-	    info.addAttack();
-	    
-	    if (ToolHelper.getFreeModifiers(stack) > 0) {
-	    	info.addFreeModifiers();
-	    }
-	    
+		info.addDurability(!detailed);
+		// for energy stored
+		info.add(String.format(TextFormatting.AQUA+"%s RF / %s RF", this.getEnergyStored(stack), this.getMaxEnergyStored(stack)));
+		
+		info.addAttack();
+		
+		if (ToolHelper.getFreeModifiers(stack) > 0) {
+			info.addFreeModifiers();
+		}
+		
 		if (detailed) {
 			info.addModifierInfo();
 		}
 		
 		list.addAll(info.getTooltip());
 		
-	    return list;
+		return list;
 	}
 	
 	/**
@@ -291,11 +291,11 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 	 * {@inheritDoc}
 	 */
 	@Override
-    public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	public ActionResult<ItemStack> onItemRightClick(World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		return this._rightClick(playerIn.getHeldItem(hand), worldIn, playerIn, hand);
 	}
 	
-	public ActionResult<ItemStack> _rightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
+	protected ActionResult<ItemStack> _rightClick(ItemStack itemStackIn, World worldIn, EntityPlayer playerIn, EnumHand hand) {
 		if (worldIn.isRemote) return new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 		
 		NBTTagCompound nbt = TagUtil.getTagSafe(itemStackIn);
@@ -303,25 +303,25 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		ActionResult<ItemStack> res = new ActionResult<>(EnumActionResult.PASS, itemStackIn);
 		
 		if (IToggleTool.getMode(itemStackIn, Mode.class) == Mode.ATTACK) {
-			res = Optional.ofNullable(EntityUtil.raytraceEntityPlayerLook(playerIn, range(itemStackIn)))
-			.map(rtr -> rtr.entityHit)
-			.map(ent -> {
-				PTEnergyDrain eevent = new PTEnergyDrain(itemStackIn, playerIn, this.energyPerAttack(itemStackIn)); // event
-				MinecraftForge.EVENT_BUS.post(eevent);
-				int energyTaken = eevent.energyDrained; // grab event result
-				
-				if (this.extractEnergy(itemStackIn, energyTaken, true) >= energyTaken
-						&& nbt.getInteger(ATTACK_DURATION_TAG) <= 0) { // able to attack?
-					if (ToolHelper.attackEntity(itemStackIn, this, playerIn, ent)) { // try attacking
-						this.extractEnergy(itemStackIn, energyTaken, false); // if success, use energy
-						nbt.setInteger(ATTACK_DURATION_TAG, this.maxAttackDuration(itemStackIn));
-						itemStackIn.setTagCompound(nbt);
-						Sounds.playSoundToAll(playerIn, Sounds.LASER_BEAM, 1.0f, 1.0f);
-						return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
-					}
-				}
-				return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
-			}).orElse(new ActionResult<>(EnumActionResult.FAIL, itemStackIn));
+			res = Optional.ofNullable(Utils.raytraceEntityPlayerLookWithPred(playerIn, range(itemStackIn), ent -> !(ent instanceof IEntityMultiPart)))
+					.map(rtr -> rtr.entityHit)
+					.map(ent -> {
+						PTEnergyDrain eevent = new PTEnergyDrain(itemStackIn, playerIn, this.energyPerAttack(itemStackIn)); // event
+						MinecraftForge.EVENT_BUS.post(eevent);
+						int energyTaken = eevent.energyDrained; // grab event result
+						
+						if (this.extractEnergy(itemStackIn, energyTaken, true) >= energyTaken
+								&& nbt.getInteger(ATTACK_DURATION_TAG) <= 0) { // able to attack?
+							if (ToolHelper.attackEntity(itemStackIn, this, playerIn, ent)) { // try attacking
+								this.extractEnergy(itemStackIn, energyTaken, false); // if success, use energy
+								nbt.setInteger(ATTACK_DURATION_TAG, this.maxAttackDuration(itemStackIn));
+								itemStackIn.setTagCompound(nbt);
+								Sounds.playSoundToAll(playerIn, Sounds.LASER_BEAM, 1.0f, 1.0f);
+								return new ActionResult<>(EnumActionResult.SUCCESS, itemStackIn);
+							}
+						}
+						return new ActionResult<>(EnumActionResult.FAIL, itemStackIn);
+					}).orElse(new ActionResult<>(EnumActionResult.FAIL, itemStackIn));
 		}
 		
 		return res;
@@ -342,7 +342,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 			
 			final IBlockState state = worldIn.getBlockState(pos);
 			
-			if (!(smeltingRes = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(state.getBlock()))).isEmpty()) {
+			if (!( smeltingRes = FurnaceRecipes.instance().getSmeltingResult(new ItemStack(state.getBlock())).copy() ).isEmpty()) {
 				PTEnergyDrain eevent = new PTEnergyDrain(stack, player, this.energyPerAttack(stack)); // event
 				MinecraftForge.EVENT_BUS.post(eevent);
 				int energyTaken = eevent.energyDrained; // grab event result
@@ -385,7 +385,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		}
 		int energy = container.getTagCompound().getInteger("Energy");
 		int energyExtracted = Math.min(energy, Math.min(getFullEnergy(container), maxExtract));
-
+		
 		if (!simulate) {
 			energy -= energyExtracted;
 			container.getTagCompound().setInteger("Energy", energy);
@@ -416,27 +416,27 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		public int receiveEnergy(int maxReceive, boolean simulate) {
 			return ToolLaserGun.this.receiveEnergy(is, maxReceive, simulate);
 		}
-
+		
 		@Override
 		public int extractEnergy(int maxExtract, boolean simulate) {
 			return ToolLaserGun.this.extractEnergy(is, maxExtract, simulate);
 		}
-
+		
 		@Override
 		public int getEnergyStored() {
 			return ToolLaserGun.this.getEnergyStored(is);
 		}
-
+		
 		@Override
 		public int getMaxEnergyStored() {
 			return ToolLaserGun.this.getMaxEnergyStored(is);
 		}
-
+		
 		@Override
 		public boolean canExtract() {
 			return true;
 		}
-
+		
 		@Override
 		public boolean canReceive() {
 			return true;
@@ -454,7 +454,7 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 		public boolean hasCapability(Capability<?> capability, EnumFacing facing) {
 			return capability == CapabilityEnergy.ENERGY;
 		}
-
+		
 		@SuppressWarnings("unchecked")
 		@Override
 		public <T> T getCapability(Capability<T> capability, EnumFacing facing) {
@@ -469,12 +469,12 @@ public class ToolLaserGun extends TinkerToolCore implements cofh.redstoneflux.ap
 	public ICapabilityProvider initCapabilities(ItemStack is, NBTTagCompound capNbt) {
 		return new Provider(is);
 	}
-
+	
 	@Override
 	public Class<Mode> clazz() {
 		return Mode.class;
 	}
-
+	
 	@Override
 	public String getTag() {
 		return MODE_TAG;

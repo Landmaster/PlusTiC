@@ -1,0 +1,6 @@
+{
+	"textures": {
+		"katana": "plustic:items/katana/mod_shulking",
+		"laser_gun": "plustic:items/laser_gun/mod_shulking"
+	}
+}
