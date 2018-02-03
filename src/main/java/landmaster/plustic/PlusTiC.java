@@ -15,6 +15,7 @@ import landmaster.plustic.modules.*;
 import landmaster.plustic.net.*;
 import landmaster.plustic.util.*;
 import net.minecraft.block.*;
+import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.*;
 import net.minecraft.util.*;
@@ -150,6 +151,8 @@ public class PlusTiC {
 				materialIntegrationStages.getOrDefault(k, CompletableFuture.completedFuture(null)).thenRun(() -> {
 					MaterialIntegration mi;
 					if (v.getRepresentativeItem().getItem() == Items.EMERALD) {
+						mi = new MaterialIntegration(v, v.getFluid());
+					} /*glass*/ else if(v.getRepresentativeItem().getItem() == Item.getItemFromBlock(Blocks.GLASS)) {
 						mi = new MaterialIntegration(v, v.getFluid());
 					} else if (v.getFluid() != null) {
 						mi = new MaterialIntegration(v, v.getFluid(), StringUtils.capitalize(k)).toolforge();
