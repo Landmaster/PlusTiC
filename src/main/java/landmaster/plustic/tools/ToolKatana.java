@@ -73,7 +73,7 @@ public class ToolKatana extends SwordCore {
 				&& is != null && is.getItem() instanceof ToolKatana) {
 			float counter = TagUtil.getTagSafe(is).getFloat(COUNTER_TAG);
 			if (counter > 0) {
-				mc.fontRenderer.drawString(I18n.format("meter.plustic.katana", counter),
+				mc.fontRenderer.drawString(I18n.format("meter.plustic.katana", Math.round(counter * 10f) / 10f),
 						5, 5, Color.HSBtoRGB(Math.min(counter/(counter_cap(is)*3), 1.0f/3), 1, 1) & 0xFFFFFF, true);
 			}
 		}
