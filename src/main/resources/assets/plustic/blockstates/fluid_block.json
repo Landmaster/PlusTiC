@@ -102,6 +102,15 @@
 		}],
 		"starmetal": [{
 			"custom": { "fluid": "starmetal" }
+		}],
+		"limonite": [{
+			"custom": { "fluid": "limonite" }
+		}],
+		"emberstone": [{
+			"custom": { "fluid": "emberstone" }
+		}],
+		"skeletal": [{
+			"custom": { "fluid": "skeletal" }
 		}]
 	}
 }

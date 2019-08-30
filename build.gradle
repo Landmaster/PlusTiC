@@ -97,6 +97,7 @@ dependencies {
 	compile files("./libs/natura-1.12.2-4.3.2.42.jar")
 	compile files("./libs/Psi-r1.1-52-deobf.jar")
 	compile files("./libs/SimplyJetpacks2-1.12.2-2.2.10.63.jar")
+	compile files("./libs/AoA3-3.1.2.b.jar")
 }
 
 import org.apache.tools.ant.filters.ReplaceTokens

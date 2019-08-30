@@ -18,8 +18,7 @@ public class ModuleBoP implements IModule {
 	public void init() {
 		final boolean isBoPLoaded = Loader.isModLoaded("BiomesOPlenty") || Loader.isModLoaded("biomesoplenty");
 		
-		if ((Config.bop && isBoPLoaded)
-				|| (Config.projectRed && Loader.isModLoaded("projectred-core"))) {
+		if ((Config.bop && isBoPLoaded) || (Config.projectRed && Loader.isModLoaded("projectred-core")) || (Config.aoa3 && Loader.isModLoaded("aoa3"))) {
 			Material sapphire = new Material("sapphire", TextFormatting.BLUE);
 			sapphire.addTrait(aquadynamic);
 			sapphire.addItem("gemSapphire", 1, Material.VALUE_Ingot);
@@ -31,7 +30,8 @@ public class ModuleBoP implements IModule {
 			TinkerRegistry.addMaterialStats(sapphire, new ExtraMaterialStats(120));
 			TinkerRegistry.addMaterialStats(sapphire, new BowMaterialStats(1, 1.5f, 4));
 			PlusTiC.materials.put("sapphire", sapphire);
-			
+		}
+		if ((Config.bop && isBoPLoaded) || (Config.projectRed && Loader.isModLoaded("projectred-core"))) {
 			Material ruby = new Material("ruby", TextFormatting.RED);
 			ruby.addTrait(BloodyMary.bloodymary);
 			ruby.addTrait(sharp, HEAD);
@@ -56,6 +56,19 @@ public class ModuleBoP implements IModule {
 			TinkerRegistry.addMaterialStats(peridot, new ExtraMaterialStats(20));
 			TinkerRegistry.addMaterialStats(peridot, new BowMaterialStats(1.4f, 1.4f, 4));
 			PlusTiC.materials.put("peridot", peridot);
+		}
+		if ((Config.bop && isBoPLoaded) || (Config.aoa3 && Loader.isModLoaded("aoa3"))){
+			Material amethyst = new Material("amethyst", TextFormatting.LIGHT_PURPLE);
+			amethyst.addTrait(Apocalypse.apocalypse);
+			amethyst.addItem("gemAmethyst", 1, Material.VALUE_Ingot);
+			amethyst.setCraftable(true);
+			new OreRegisterPromise("gemAmethyst").thenAccept(amethyst::setRepresentativeItem);
+			PlusTiC.proxy.setRenderInfo(amethyst, 0xFF00FF);
+			TinkerRegistry.addMaterialStats(amethyst, new HeadMaterialStats(1200, 6, 10, COBALT));
+			TinkerRegistry.addMaterialStats(amethyst, new HandleMaterialStats(1.6f, 100));
+			TinkerRegistry.addMaterialStats(amethyst, new ExtraMaterialStats(100));
+			TinkerRegistry.addMaterialStats(amethyst, new BowMaterialStats(0.65f, 1.7f, 6.5f));
+			PlusTiC.materials.put("amethyst", amethyst);
 		}
 		if (Config.bop && isBoPLoaded) {
 			Material malachite = new Material("malachite_gem", TextFormatting.DARK_GREEN);
@@ -108,18 +121,6 @@ public class ModuleBoP implements IModule {
 			TinkerRegistry.addMaterialStats(tanzanite, new ExtraMaterialStats(25));
 			TinkerRegistry.addMaterialStats(tanzanite, PlusTiC.justWhy);
 			PlusTiC.materials.put("tanzanite", tanzanite);
-			
-			Material amethyst = new Material("amethyst", TextFormatting.LIGHT_PURPLE);
-			amethyst.addTrait(Apocalypse.apocalypse);
-			amethyst.addItem("gemAmethyst", 1, Material.VALUE_Ingot);
-			amethyst.setCraftable(true);
-			Utils.setDispItem(amethyst, "biomesoplenty", "gem");
-			PlusTiC.proxy.setRenderInfo(amethyst, 0xFF00FF);
-			TinkerRegistry.addMaterialStats(amethyst, new HeadMaterialStats(1200, 6, 10, COBALT));
-			TinkerRegistry.addMaterialStats(amethyst, new HandleMaterialStats(1.6f, 100));
-			TinkerRegistry.addMaterialStats(amethyst, new ExtraMaterialStats(100));
-			TinkerRegistry.addMaterialStats(amethyst, new BowMaterialStats(0.65f, 1.7f, 6.5f));
-			PlusTiC.materials.put("amethyst", amethyst);
 		}
 	}
 	

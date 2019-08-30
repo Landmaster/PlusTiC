@@ -57,6 +57,9 @@ fluid.plustic.fiery_blood.name=Fiery Blood
 fluid.plustic.fiery.name=Molten Fiery Metal
 fluid.plustic.thaumium.name=Molten Thaumium
 fluid.plustic.starmetal.name=Molten Starmetal
+fluid.plustic.limonite.name=Molten Limonite
+fluid.plustic.emberstone.name=Molten Emberstone
+fluid.plustic.skeletal.name=Molten Skeletal
 
 material.sapphire.name=Sapphire
 material.ruby.name=Ruby
@@ -133,6 +136,11 @@ material.kyronite.name=Kyronite
 material.pladium.name=Pladium
 material.aethium.name=Aethium
 material.starmetal.name=Starmetal
+material.limonite.name=Limonite
+material.emberstone.name=Emberstone
+material.skeletal.name=Skeletal
+material.bloodstone.name=Bloodstone
+material.crystallite.name=Crystallite
 
 modifier.bloodymary.name=Bloody Mary
 modifier.bloodymary.desc=§oBrought to you by the legendary Queen of England...§r\nDeals bonus damage depending on the amount of health already lost by the target. Also, a chance to drop a Coagulated Blood for each hit.
